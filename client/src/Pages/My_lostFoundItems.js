@@ -38,12 +38,16 @@ const My_lostFoundItems = () => {
         <LoadingBox />
       ) : (
         <div className="Bcards-cont">
-          
-             { items.map((card,index) => {
+          {items.length>0?(
+              items.map((card,index) => {
               return (
                 <LostFoundCard handleClick={handleClick} postedby={'You'} editOption={true} key={index} card={card}/>
               )
-            })}
+            })
+          ):(
+            <div>No Requirements as of now</div>
+          )
+        }
           
         </div>
       )}

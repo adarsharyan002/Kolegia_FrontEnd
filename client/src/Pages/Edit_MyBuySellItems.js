@@ -13,6 +13,7 @@ const productData=location.state.Data;
 
 var Name,Description,Price,id,Category,Brand,Color;
 
+//STORING DATA FROM LOCATION
 
 if(productData){
    Name=productData.name;
@@ -40,13 +41,14 @@ const [warranty,setWarranty]=useState('')
 
 const  Status1=useSelector((state=>state.buySell.editBuySellResponse));
 
+//CHECKING RESPONSE 
 if(Status1===200){
     dispatch(resetStatus);
      navigate('/sidebar/myOwnBuySellItems')
      
  }
 
-
+//FUCNTION TO DISPATCH ACTION
 const handleSubmit=(e)=>{
   e.preventDefault();
   const token = localStorage.getItem("jwt");
@@ -80,18 +82,26 @@ const handleSubmit=(e)=>{
           <div  className="overlay"></div>
           <div className="modal-content">
           <h2 style={{color:'#332A7C',marginBottom:'10px'}}>Add Product</h2>
-            <form  onSubmit={handleSubmit}>
+            <form className="form02" onSubmit={handleSubmit}>
            
-            <label  htmlFor="input">Name of product</label>
-            <input defaultValue={Name}  onChange={e=>setItemName(e.target.value)} type="text" />
-            <input defaultValue={Brand} onChange={e=>setBrand(e.target.value)} type="text" placeholder="Brand" />
-            <input defaultValue={Color} onChange={e=>setColor(e.target.value)} type="text" placeholder="Color of product" />
+          
+            <input placeholder="Name of product" defaultValue={Name}  onChange={e=>setItemName(e.target.value)} type="text" />
+            <input placeholder="Brand" defaultValue={Brand} onChange={e=>setBrand(e.target.value)} type="text" placeholder="Brand" />
+            <input  defaultValue={Color} onChange={e=>setColor(e.target.value)} type="text" placeholder="Color of product" />
+ 
+            <div>
+            <p>Bought date</p>
             <input  onChange={e=>setBoughtTime(e.target.value)} type="date" placeholder="Bought date" />
-            <input  onChange={e=>setWarranty(e.target.value)} type="date" placeholder="Warranty Ends" />
-            <input defaultValue={Category} onChange={e=>setCategory(e.target.value)} type="text" placeholder="Category" />
-            <label  htmlFor="input">description</label>
+            </div>
+            <input placeholder="Category" defaultValue={Category} onChange={e=>setCategory(e.target.value)} type="text" placeholder="Category" />
+            
             <input defaultValue={Description} onChange={e=>setDescription(e.target.value)} type="text" />
-            <label htmlFor="input">Price</label>
+            <div>
+            <p>Warranty till</p>
+            <input  onChange={e=>setWarranty(e.target.value)} type="date" placeholder="Warranty Ends" />
+            </div>
+            
+           
             <input defaultValue={Price} onChange={e=>setPrice(e.target.value)} type="number" />
             <label htmlFor="input">Upload-Image</label>
             <input style={{border:'none'}} onChange={e=>setImageList([...imageList,...e.target.files])} type="file" multiple />

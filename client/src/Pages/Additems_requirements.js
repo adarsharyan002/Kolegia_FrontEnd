@@ -14,6 +14,7 @@ function Modal({ toggleModal, modal }) {
  
   const status5=useSelector((state=>state.requirement.addrequirementresponse))
 
+  //CHECKING ADD-REQUIREMENT RSPONSE
   if(status5===200){
     dispatch(resetStatus);
     window.location.reload(true);
@@ -22,6 +23,8 @@ function Modal({ toggleModal, modal }) {
 
   const dispatch = useDispatch();
 
+
+  //FUCNTION TO DISPATCH ACTION
   const handleSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("jwt");

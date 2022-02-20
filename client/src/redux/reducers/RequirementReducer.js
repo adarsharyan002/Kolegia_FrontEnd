@@ -1,6 +1,6 @@
 import { GET_ALL_REQUIREMENTS,
   ADD_NEW_REQUIREMENT,
-  NEW_REQUEST ,
+  NEW_REQUEST_REQUIREMENT ,
   CHECKING_ERROR_REQUIREMENTS,
 GET_MY_OWN_REQUIREMENTS,
 EDIT_REQUIREMENT,
@@ -9,7 +9,7 @@ DELETE_REQUIREMENT} from "../constants/AllConstants";
 
 const initialState = {
     items: [],
-    Loading:false,
+    isLoading:false,
     addrequirementresponse:"",
     errorMessageRequirements:'',
     ownItems:[],
@@ -24,13 +24,13 @@ const initialState = {
         return {
           ...state,
           items: action.payload.requirements,
-          Loading: false,
+          isLoading: false,
         };
      
-        case NEW_REQUEST:
+        case NEW_REQUEST_REQUIREMENT:
           return {
             ...state,
-            Loading: action.payload,
+            isLoading: action.payload,
           };
     
       
@@ -43,7 +43,7 @@ const initialState = {
             return {
               ...state,
               ownItems: action.payload.Requirements,
-              Loading: false,
+              isLoading: false,
             };
 
             case EDIT_REQUIREMENT:

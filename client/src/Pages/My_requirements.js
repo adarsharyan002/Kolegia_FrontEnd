@@ -3,14 +3,15 @@ import "../Components/Requirement/requirement.css";
 import Req_feed from '../Components/Requirement/Req_feed';
 import { useDispatch, useSelector } from "react-redux";
 import {getAllOwnRequirements} from '../redux/actions/RequirementActions'
-
+import LoadingBox from "../Components/LoadingBox";
 import { useState, useEffect } from "react";
 import { deleteRequirement } from "../redux/actions/RequirementActions";
 
 const My_requirements = () => {
     const itemList = useSelector((state) => state.requirement.ownItems);
   
-    
+    const isLoading = useSelector((state) => state.requirement.isLoading);
+
     const dispatch = useDispatch();
 
     const [items,setItems]=useState([])
@@ -34,10 +35,14 @@ const handleClick=(data,e)=>{
 
 
 }
-    
+    console.log(isLoading);
     return (
+      <>
+      {isLoading ? (
+      <LoadingBox />
+    ) :(
     
-  <div className='requirement_page'>
+       <div className='requirement_page'>
      
       <div className='page_content'>
       {items.length>0?(
@@ -47,20 +52,15 @@ const handleClick=(data,e)=>{
           );
         })
         ) : (
-            <div></div>
+            <div>No Requirements as of now</div>
           )}
     
-      
-     
       </div>
    
-     
-     
-      
-    
-    
   </div>
+  )};
+   </>
     );
-};
+}
 
 export default My_requirements;

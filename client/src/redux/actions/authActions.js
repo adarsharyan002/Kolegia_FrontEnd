@@ -20,6 +20,8 @@ import {
    
     } from "../constants/AllConstants";
 
+
+    //VERIFY EMAIL
 export const verifyEmail=(email)=>async (dispatch)=>{
     
     try {
@@ -46,6 +48,8 @@ export const verifyEmail=(email)=>async (dispatch)=>{
        
     }
 }
+
+//VERIFY EMAIL TO RESET PASSWORD
 export const verifyEmailForReset=(email)=>async (dispatch)=>{
     
     try {
@@ -72,6 +76,8 @@ export const verifyEmailForReset=(email)=>async (dispatch)=>{
        
     }
 }
+
+//VERIFY OTP
 export const verifyOtp=(otp,otpId,Verification)=>async (dispatch)=>{
 
     try {
@@ -99,6 +105,8 @@ export const verifyOtp=(otp,otpId,Verification)=>async (dispatch)=>{
           }
     }
 }
+
+//VERIFY OTP TO RESET PASSWORD
 export const verifyOtpForResetPassword=(otp,otpId)=>async (dispatch)=>{
 
     try {
@@ -126,6 +134,8 @@ export const verifyOtpForResetPassword=(otp,otpId)=>async (dispatch)=>{
           }
     }
 }
+
+//REGISTER ACTION
 export const addUserDetails=(data)=>async (dispatch)=>{
 
     try {
@@ -152,6 +162,8 @@ export const addUserDetails=(data)=>async (dispatch)=>{
           }
     }
 }
+
+//LOGIN WITH GOOGLE
 export const loginWithGoogle=(id_token)=>async (dispatch)=>{
 
     try {
@@ -178,6 +190,7 @@ export const loginWithGoogle=(id_token)=>async (dispatch)=>{
     }
 }
 
+//SIGN IN WITH EMAIL ACTION
 export const signInWithEmail=(email,password)=>async (dispatch)=>{
 
     try {
@@ -206,7 +219,7 @@ export const signInWithEmail=(email,password)=>async (dispatch)=>{
 }
 
 
-
+//LOGOUT USER
 export const logoutUser= (token)=> async (dispatch) => {
     
     
@@ -242,6 +255,8 @@ export const logoutUser= (token)=> async (dispatch) => {
         }
       }
     };
+
+    //FORGOT PASSWORD
     export const resetPasswordAction=(email,password,reset_request_id)=>async (dispatch)=>{
 
         try {
@@ -267,6 +282,8 @@ export const logoutUser= (token)=> async (dispatch) => {
               }
         }
     };
+
+    //CHANGE PASSWORD
     export const changePasswordAction=(password,NewPassword)=>async (dispatch)=>{
 
         try {
@@ -299,6 +316,8 @@ export const logoutUser= (token)=> async (dispatch) => {
               }
         }
     };
+
+    //EDIT PROFILE
     export const editProfile= (formData)=> async (dispatch) => {
     
     
@@ -332,6 +351,8 @@ export const logoutUser= (token)=> async (dispatch) => {
           }
         }
       };
+
+      //RESET STATUS
       export const resetStatus=(dispatch)=>{
         dispatch({
           type:RESET_PROFILE_STATUS,
@@ -340,6 +361,8 @@ export const logoutUser= (token)=> async (dispatch) => {
         )
     
        };
+
+       //RESET ERROR MESSAGE
        export const resetErrorMessage=(dispatch)=>{
         dispatch({
           type:RESET_ERROR_MESSAGE,
@@ -349,6 +372,8 @@ export const logoutUser= (token)=> async (dispatch) => {
     
        };
     
+
+       //DASHBOARD STATS
 
  export const getDashBoardStats=() => async(dispatch)=>{
 

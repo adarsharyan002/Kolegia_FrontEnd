@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch ,useSelector} from "react-redux";
 import "../Components/Buy_sell/AddItems.css";
 import jwt_decode from "jwt-decode";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { addNewBuySellItem ,resetStatus} from "../redux/actions/BuySellActions";
 
@@ -21,12 +23,34 @@ import { addNewBuySellItem ,resetStatus} from "../redux/actions/BuySellActions";
  
 const dispatch=useDispatch();
 
+function get_iso_time({ date, time }) {
+  try {
+    let newDateTime = date ? new Date(date) : new Date();
+
+    if (time) {
+      let digits = time.split(":");
+      let hours = parseInt(digits[0]);
+      let minutes = parseInt(digits[1]);
+
+      newDateTime.setHours(hours, minutes);
+    }
+
+    return newDateTime.toISOString();
+  } catch (error) {
+    return new Date().toISOString();
+  }
+}
+
+const newBoughtTime=get_iso_time({date:boughtTime});
+const newWarranty=get_iso_time({date:warranty});
+
 var Status3;
 var Message3;
 
 Status3=useSelector((state=>state.buySell.addItemsResponse));
 const errorMessage4=useSelector((state)=>state.buySell.errorMessageBuySell)
 
+//VERIFYING ADDITEMS-RESPONSE
 
 if(Status3===200){
   dispatch(resetStatus);
@@ -39,7 +63,7 @@ Message3=errorMessage4;
 
  
 
-
+//FUCNTION TO DISPATCH ACTION
 const handleSubmit=(e)=>{
   e.preventDefault();
   const token = localStorage.getItem("jwt");
@@ -55,8 +79,8 @@ const handleSubmit=(e)=>{
   formData.append("token", decoded.auth_token)
   formData.append('category',category)
   formData.append('color',color)
-  formData.append('bought_datetime',boughtTime)
-  formData.append('warranty_till',warranty)
+  formData.append('bought_datetime',newBoughtTime)
+  formData.append('warranty_till',newWarranty)
   formData.append('brand',brand)
   
 
@@ -79,10 +103,20 @@ const handleSubmit=(e)=>{
             <input  onChange={e=>setItemName(e.target.value)} type="text" placeholder="Name of product" />
             <input onChange={e=>setBrand(e.target.value)} type="text" placeholder="Brand" />
             <input  onChange={e=>setColor(e.target.value)} type="text" placeholder="Color of product" />
-            <input  onChange={e=>setDescription(e.target.value)} type="text" placeholder="Description" />
+            
+            
+        <input  onChange={e=>setDescription(e.target.value)} type="text" placeholder="Description" />
+            <div>
+            <p>Bought date</p>
+    
             <input  onChange={e=>setBoughtTime(e.target.value)} type="date" placeholder="Bought date" />
+            </div>
+           
             <input  onChange={e=>setPrice(e.target.value)} type="number" placeholder="Price"/>
+           <div>
+            <p>Warranty till</p>
             <input  onChange={e=>setWarranty(e.target.value)} type="date" placeholder="Warranty Ends" />
+            </div>
             <input  onChange={e=>setCategory(e.target.value)} type="text" placeholder="Category" />
             <label style={{fontFamily:"Hind Siliguri, sans-serif",fontWeight:'700',fontSize:'18px'}} htmlFor="input">Upload-Image</label>
             <input  onChange={e=>setImageList([...imageList,...e.target.files])} type="file" multiple />

@@ -14,8 +14,7 @@ const Change_Password = () => {
     const navigate = useNavigate();
     const location=useLocation();
     const ChangePasswordRes=useSelector((state)=>state.auth.changePasswordResponse)
-    // const responseStatusCode= useSelector((state) => state.auth.resetStatusCode);
-    // const reset_request_id=useSelector((state)=>state.auth.requestId)
+   
     const errorMessage=useSelector((state)=>state.auth.errorMessage)
     const [currentPassword,setPassword]=useState('');
     const [newPassword,setNewPassword]=useState('');
@@ -24,6 +23,7 @@ const Change_Password = () => {
 
     var message9;
 
+    //CHECKING CHANGE PASSWORD STATUS
     if(ChangePasswordRes===200){
         dispatch(resetErrorMessage)
         dispatch(resetStatus);
@@ -35,10 +35,13 @@ const Change_Password = () => {
 
      }
 
+     //TOGGLE LOADING
       useEffect(()=>{
         setLoading(false);
        },[message9]);
    
+
+//CONTAINER STYLES
     const style={
 
 box:{
@@ -64,6 +67,8 @@ cont:{
     height:'100vh'
 }
 }
+
+//FUCNTION TO DISPATCH ACTION
      const handleClick =()=>{
          setLoading(true)
         

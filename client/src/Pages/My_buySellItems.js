@@ -69,7 +69,7 @@ const [items,setItems]=useState([])
             );
           })
         ) : (
-          <div></div>
+          <div>No buy sell items</div>
         )}
       </Grid>
       

@@ -14,7 +14,11 @@ import Navbar from "../Components/Appbar/Navbar";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
+
+
 function AddItem() {
+
+  //CATEGORIES DATA
   const categories = [
     {
       value: "Electronics and Mobiles",
@@ -49,6 +53,8 @@ function AddItem() {
       label: "Books & Audible",
     },
   ];
+
+  //STATE
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [brand, setBrand] = useState("");
@@ -70,7 +76,7 @@ function AddItem() {
   );
 
 
-
+//FUNCTION TO CONVERT DATE IN ISO FORMAT
 
   function get_iso_time({ date, time }) {
     try {
@@ -91,9 +97,10 @@ function AddItem() {
   }
 
   const newLostTime=get_iso_time({time:lostTime});
+  const newLostDate=get_iso_time({date:lostDate});
 
 
-
+//FUNCTION TO DISPATCH ACTION
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -111,7 +118,7 @@ function AddItem() {
 
     formData.append("color", color);
     formData.append("description", description);
-    formData.append("lost_date", lostDate);
+    formData.append("lost_date", newLostDate);
     formData.append("lost_time", newLostTime);
     formData.append("lost_location", lostLocation);
     formData.append("token", decoded.auth_token);

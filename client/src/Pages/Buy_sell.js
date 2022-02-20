@@ -28,6 +28,8 @@ const Cards = () => {
 
   const dispatch = useDispatch();
 
+
+  //GETTING BUY SELL ITEMS
   useEffect(() => {
     dispatch(getAllBuySellItems());
    
@@ -37,6 +39,8 @@ const Cards = () => {
     setModal(!modal);
   };
 
+
+  //TOGGLE MODEL
   if (modal) {
     document.body.classList.add("active-modal");
   } else {

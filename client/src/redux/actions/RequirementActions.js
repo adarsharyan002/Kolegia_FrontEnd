@@ -9,12 +9,13 @@ import {
   EDIT_REQUIREMENT,
   RESET_STATUS,
   DELETE_REQUIREMENT,
-  CHECKING_ERROR_REQUIREMENTS
+  CHECKING_ERROR_REQUIREMENTS,
+  NEW_REQUEST_REQUIREMENT
 } from "../constants/AllConstants";
 
 export const getAllRequirements = () => async (dispatch) => {
   dispatch({
-    type: NEW_REQUEST,
+    type: NEW_REQUEST_REQUIREMENT,
     payload: true,
   });
   try {
@@ -71,7 +72,7 @@ export const addRequirements =
 
 export const getAllOwnRequirements = () => async (dispatch) => {
   dispatch({
-    type: NEW_REQUEST,
+    type:NEW_REQUEST_REQUIREMENT,
     payload: true,
   });
   try {

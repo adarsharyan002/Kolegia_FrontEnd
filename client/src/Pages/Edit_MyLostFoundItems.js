@@ -20,6 +20,8 @@ function Edit_MyLostFoundItems() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
+
+  //CATEGORIES DATA
   const categories = [
     {
       value: "Electronics and Mobiles",
