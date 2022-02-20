@@ -36,7 +36,7 @@ function LostFoundResponses() {
     if (e.target.value === "accept") {
       setIsLoading(true);
       const res = await axios.post(
-        "http://localhost:3000/api/v1/raisedhands/accept-raised-hand",
+        "https://kolegia.herokuapp.com/api/v1/raisedhands/accept-raised-hand",
         { _id: response._id, user_details, token },
         {
           headers: {
