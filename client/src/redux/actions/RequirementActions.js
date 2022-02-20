@@ -22,7 +22,7 @@ export const getAllRequirements = () => async (dispatch) => {
     const token = localStorage.getItem("jwt");
     const decoded = jwt_decode(token);
     const { data } = await axios.get(
-      "http://localhost:3000/api/v1/requirements/get-requirement-feed",
+      "https://kolegia.herokuapp.com/api/v1/requirements/get-requirement-feed",
       {
         headers: {
           authorization: `Bearer ${decoded.auth_token}`,
@@ -43,7 +43,7 @@ export const addRequirements =
   (title, description, token) => async (dispatch) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/requirements/create-a-requirement",
+        "https://kolegia.herokuapp.com/api/v1/requirements/create-a-requirement",
         {
           title,
           description,
@@ -79,7 +79,7 @@ export const getAllOwnRequirements = () => async (dispatch) => {
     const token = localStorage.getItem("jwt");
     const decoded = jwt_decode(token);
     const { data } = await axios.get(
-      "http://localhost:3000/api/v1/requirements/get-own-requirements",
+      "https://kolegia.herokuapp.com/api/v1/requirements/get-own-requirements",
       {
         headers: {
           authorization: `Bearer ${decoded.auth_token}`,
@@ -100,7 +100,7 @@ export const editRequirements =
   (requirement_id, title, description, token) => async (dispatch) => {
     try {
       const res = await axios.put(
-        "http://localhost:3000/api/v1/requirements/edit-a-requirement",
+        "https://kolegia.herokuapp.com/api/v1/requirements/edit-a-requirement",
         {
           requirement_id,
           title,
@@ -134,7 +134,7 @@ export const deleteRequirement =
 
     try {
       const res = await axios.delete(
-        "http://localhost:3000/api/v1/requirements/delete-requirement",
+        "https://kolegia.herokuapp.com/api/v1/requirements/delete-requirement",
         
         {
           headers: {

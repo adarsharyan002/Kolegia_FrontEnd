@@ -24,7 +24,7 @@ export const getAllBuySellItems = () => async (dispatch) => {
     const decoded = jwt_decode(token);
     const { data } = await axios.get(
       
-      "http://localhost:3000/api/v1/buy-sell-items/get-buy-sell-feed",{
+      "https://kolegia.herokuapp.com/api/v1/buy-sell-items/get-buy-sell-feed",{
         headers: {
           authorization: `Bearer ${decoded.auth_token}`,
         },
@@ -51,7 +51,7 @@ export const buySellSearch = (searchQuery) => async (dispatch) => {
     const decoded = jwt_decode(token);
 
     const { data } = await axios.get(
-      `http://localhost:3000/api/v1/buy-sell-items/search-buy-sell-products?search=${searchQuery}`,
+      `https://kolegia.herokuapp.com/api/v1/buy-sell-items/search-buy-sell-products?search=${searchQuery}`,
       {
         headers: {
           authorization: `Bearer ${decoded.auth_token}`,
@@ -84,7 +84,7 @@ export const getSingleProductDetails = (itemId) => async (dispatch) => {
     const token = localStorage.getItem("jwt");
     const decoded = jwt_decode(token);
     const { data } = await axios.get(
-      `http://localhost:3000/api/v1/buy-sell-items/get-buysell-product-details?product_id=${itemId}`,{
+      `https://kolegia.herokuapp.com/api/v1/buy-sell-items/get-buysell-product-details?product_id=${itemId}`,{
         headers:{
           authorization:`Bearer ${decoded.auth_token}`,
         },
@@ -109,7 +109,7 @@ export const addNewBuySellItem = (formData) => async (dispatch) => {
         token = key[1];
       }
     }
-    const res = await axios.post("http://localhost:3000/api/v1/buy-sell-items/create-new-buysell-product", formData,{
+    const res = await axios.post("https://kolegia.herokuapp.com/api/v1/buy-sell-items/create-new-buysell-product", formData,{
       headers:{
         authorization:`Bearer ${token}`,
       }
@@ -139,7 +139,7 @@ export const getAllOwnBuySellItems = () => async (dispatch) => {
       const token = localStorage.getItem("jwt");
     const decoded = jwt_decode(token);
       const { data } = await axios.get(
-        "http://localhost:3000/api/v1/buy-sell-items/get-own-buy-sell-list",{
+        "https://kolegia.herokuapp.com/api/v1/buy-sell-items/get-own-buy-sell-list",{
           headers:{
             authorization:`Bearer ${decoded.auth_token}`,
           },
@@ -167,7 +167,7 @@ export const getAllOwnBuySellItems = () => async (dispatch) => {
         }
       }
      const res=  await axios.put(
-        "http://localhost:3000/api/v1/buy-sell-items/edit-buy-sell-product",formData
+        "https://kolegia.herokuapp.com/api/v1/buy-sell-items/edit-buy-sell-product",formData
           
         
           ,{
@@ -202,7 +202,7 @@ export const getAllOwnBuySellItems = () => async (dispatch) => {
       try {
   
        const res=  await axios.delete(
-          "http://localhost:3000/api/v1/buy-sell-items/delete-buy-sell-product",
+          "https://kolegia.herokuapp.com/api/v1/buy-sell-items/delete-buy-sell-product",
             
        {
             
