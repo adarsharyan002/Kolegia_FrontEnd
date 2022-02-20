@@ -1,78 +1,70 @@
-# Kolegia
+# Getting Started with Create React App
 
-<p align="center">
-  <img width="500" src="https://i.imgur.com/8NsQdLA.png" />
-</p>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Kolegia is a platform where users can post their lost items and find them. Users can also sell their items by posting them. Users can also post the requirement for a certain product.
+## Available Scripts
 
-## Features
+In the project directory, you can run:
 
-- Users can post their lost items and other users can help them find it.
-- Users can also sell something, by posting it on the platform.
-- If a user requires something, they can post a requirement for that.
-- Directly chat with the seller of the product for buying any item.
-- If someone wants to raise a hand on a lost item, they can easily do that.
+### `npm start`
 
-## ✨ Website Preview
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
- <p>
-  <img src="https://github.com/AdityaPandey03/Kolegia_FrontEnd/blob/480368f83f3e171f47bbcb9eb88f0a22ce92d74b/client/src/assests/1.jpeg" width="800" height="600" />
-  <img src="https://github.com/AdityaPandey03/Kolegia_FrontEnd/blob/480368f83f3e171f47bbcb9eb88f0a22ce92d74b/client/src/assests/3.jpeg" width="800" height="600" />
-   <img src="https://github.com/AdityaPandey03/Kolegia_FrontEnd/blob/480368f83f3e171f47bbcb9eb88f0a22ce92d74b/client/src/assests/4.jpeg" width="800" height="600" />
-</p> 
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## ✨ App Preview
+### `npm test`
 
-<p align="center">
-  <img src="https://i.imgur.com/diC3koE.png" width="100%" />
-</p>
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-##  Dark Theme
+### `npm run build`
 
-<p align="center">
-  <img src="https://i.imgur.com/wIBS9gU.png" width="100%" />
-</p>
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Development Setup
+### `npm run eject`
 
-To set up Kolegia for development, you need to follow the steps mentioned below:
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### Step 1: Install Node.js from the [Node.js official website](https://nodejs.org/en/).
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-During the developement process, I used node version `v16.13.0`. You can check your node version by running the following command:
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-```shell
-node -v
-```
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-### Step 2: Setup [React](https://github.com/facebook/create-react-app) environment.
+## Learn More
 
-Follow the steps mentioned in the official documentation to setup the environment.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-### Step 3: Clone the repository
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-    git clone https://github.com/AdityaPandey03/Kolegia_FrontEnd.git
+### Code Splitting
 
-### Step 4: Install dependencies
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-    cd client
+### Analyzing the Bundle Size
 
-    npm install
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Step 5: Create a `.env` file for environment variables
+### Making a Progressive Web App
 
-You'll have to create a `.env` file for environment variables with the variables listed [here](https://github.com/kartikeyvaish/Kolegia_Mobile/blob/main/README.md#env-file)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Step 6: Running the application
+### Advanced Configuration
 
-Run the app in the development mode.
-Just type `npm start` in the terminal to open the website.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-## Environemnt Variables
+### Deployment
 
-```dosini
-REACT_APP_GOOGLE_CLIENT_ID=""
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
