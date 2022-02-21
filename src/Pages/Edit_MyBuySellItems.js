@@ -4,6 +4,8 @@ import "../Components/Buy_sell/AddItems.css";
 import jwt_decode from "jwt-decode";
 import { editBuySellItem,resetStatus } from "../redux/actions/BuySellActions";
 import {useLocation,useNavigate} from 'react-router-dom'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import LoadingButton from '@mui/lab/LoadingButton';
 
  function Modal() {
 const dispatch=useDispatch();
@@ -35,6 +37,7 @@ const [color,setColor]=useState(Color)
 const [category,setCategory]=useState(Category)
 const [boughtTime,setBoughtTime]=useState('')
 const [warranty,setWarranty]=useState('')
+const [loading, setLoading] = useState(false);
 
 
 
@@ -51,6 +54,7 @@ if(Status1===200){
 //FUCNTION TO DISPATCH ACTION
 const handleSubmit=(e)=>{
   e.preventDefault();
+  setLoading(true);
   const token = localStorage.getItem("jwt");
     const decoded = jwt_decode(token);
 
@@ -81,8 +85,8 @@ const handleSubmit=(e)=>{
         <div className="modal">
           <div  className="overlay"></div>
           <div className="modal-content">
-          <h2 style={{color:'#332A7C',marginBottom:'10px'}}>Add Product</h2>
-            <form className="form02" onSubmit={handleSubmit}>
+          <h2 style={{color:'#332A7C',marginBottom:'10px'}}>Edit Product</h2>
+            <form className="form02" >
            
           
             <input placeholder="Name of product" defaultValue={Name}  onChange={e=>setItemName(e.target.value)} type="text" />
@@ -105,7 +109,16 @@ const handleSubmit=(e)=>{
             <input defaultValue={Price} onChange={e=>setPrice(e.target.value)} type="number" />
             <label htmlFor="input">Upload-Image</label>
             <input style={{border:'none'}} onChange={e=>setImageList([...imageList,...e.target.files])} type="file" multiple />
-            <button>Submit</button>
+            <LoadingButton
+                style={{width:'24rem',height:'2.5rem',fontSize:'1.4rem',background:"#F25767",color:'white',border:'none',fontFamily:"Inter, monospace",fontWeight:'700',borderRadius:'6px'}}
+                className='submit button'
+        onClick={handleSubmit}
+        endIcon={<ArrowForwardIosIcon/>}
+        loading={loading}
+        loadingPosition="end"
+        variant="contained"
+      >Submit
+      </LoadingButton>
             </form>
 
             

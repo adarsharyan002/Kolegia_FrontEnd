@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
 import "../Components/profile/editProfile.css";
@@ -6,6 +6,8 @@ import {editProfile,resetStatus} from "../redux/actions/authActions";
 import {  useNavigate,useLocation} from "react-router-dom"
 import {resetErrorMessage} from '../redux/actions/authActions';
 import Navbar from "../Components/Appbar/Navbar";
+import LoadingButton from '@mui/lab/LoadingButton';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 
@@ -17,6 +19,8 @@ const Edit_Profile = () => {
     const profileData=location.state.Data;
     const dispatch=useDispatch();
 
+
+    
    var Name,Hostel,Room_Number,Phone,Profile_Picture;
 
    if(profileData){
@@ -55,11 +59,15 @@ const Edit_Profile = () => {
     const [room_number,setRoomNo]=useState(Room_Number)
     const [phone,setPhone]=useState(Phone)
     const [profile_Picture,setProfilePicture]=useState('')
+    const [loading, setLoading] = useState(false);
     
 
     
 
+    useEffect(()=>{
    
+      setLoading(false);
+     },[errorMessage2]);
 
     
     
@@ -68,7 +76,9 @@ const Edit_Profile = () => {
 
 
     const handleSubmit=(e)=>{
+
         e.preventDefault();
+        setLoading(true);
         const token = localStorage.getItem("jwt");
           const decoded = jwt_decode(token);
       
@@ -109,8 +119,21 @@ const Edit_Profile = () => {
          
           
             
-            <button style={{width:'24rem',height:'2.5rem',fontSize:'1.4rem',background:"#F25767",color:'white',border:'none',fontFamily:"Inter, monospace",fontWeight:'700',
-            borderRadius:'6px'}} onClick={handleSubmit}>Submit</button>
+            {/* <button style={{width:'24rem',height:'2.5rem',fontSize:'1.4rem',background:"#F25767",color:'white',border:'none',fontFamily:"Inter, monospace",fontWeight:'700',
+            borderRadius:'6px'}} onClick={handleSubmit}>Submit</button> */}
+
+<LoadingButton
+               style={{width:'24rem',height:'2.5rem',fontSize:'1.4rem',background:"#F25767",color:'white',border:'none',fontFamily:"Inter, monospace",fontWeight:'700',
+               borderRadius:'6px'}}
+                className='submit button'
+        onClick={handleSubmit}
+        endIcon={<ArrowForwardIosIcon/>}
+        loading={loading}
+        loadingPosition="end"
+        variant="contained"
+      >
+        Submit
+      </LoadingButton>
             <p style={{color:'black'}}>{errorMessage2}</p>
         </div>
         </div>
