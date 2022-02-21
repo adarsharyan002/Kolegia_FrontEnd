@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.2eb208fc.css",
-    "main.js": "/static/js/main.022f8bd5.js",
+    "main.js": "/static/js/main.4a48cd4f.js",
     "static/media/buyonline.jpg": "/static/media/buyonline.f4f6b0927b84907c3447.jpg",
     "static/media/namaste.jpg": "/static/media/namaste.196488170abe8cc86e5d.jpg",
     "static/media/home3.png": "/static/media/home3.d9174b56103ca4fd6c55.png",
@@ -19,10 +19,10 @@
     "static/media/Tickets.svg": "/static/media/Tickets.c706b6352728fed4c8b0806d93b6e1b0.svg",
     "index.html": "/index.html",
     "main.2eb208fc.css.map": "/static/css/main.2eb208fc.css.map",
-    "main.022f8bd5.js.map": "/static/js/main.022f8bd5.js.map"
+    "main.4a48cd4f.js.map": "/static/js/main.4a48cd4f.js.map"
   },
   "entrypoints": [
     "static/css/main.2eb208fc.css",
-    "static/js/main.022f8bd5.js"
+    "static/js/main.4a48cd4f.js"
   ]
 }

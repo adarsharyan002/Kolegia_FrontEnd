@@ -129,7 +129,7 @@ function Messenger() {
       );
     }
   };
-console.log(currentChat);
+
   return (
     <>
     <Navbar visibleSearch={false} presentPage="chatRoom" />

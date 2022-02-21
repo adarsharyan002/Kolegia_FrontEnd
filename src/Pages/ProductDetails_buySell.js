@@ -58,7 +58,7 @@ function ProductDetails() {
   };
   const token = decoded.auth_token;
   var { owner_details } = singleProduct;
-  console.log(singleProduct);
+  
 
   const dispatch = useDispatch();
   useEffect(async () => {
