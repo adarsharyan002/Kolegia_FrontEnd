@@ -100,8 +100,7 @@ else {
             <input onChange={e=>setRollNo(e.target.value)} type="text" placeholder="Roll No(2020-IMGxxx)" />
             <input onChange={e=>setHostel(e.target.value)} type="text" placeholder="Hostel(BH-1)" />
             <input onChange={e=>setRoomNo(e.target.value)} type="text" placeholder="Room No" />
-            <label style={{marginTop:'18px',fontFamily:"Inter, sans-serif",fontWeight:'600',color:'black'}} htmlFor="input">Profile Picture</label>
-            <input style={{border:'none'}} onChange={e=>setProfilePicture(e.target.files[0])} type="file" />
+           
             <input onChange={e=>setPassword(e.target.value)} type="password" placeholder="Password" />
             <input onChange={e=>setConfirm_Password(e.target.value)} type="password" placeholder="Confirm Password" />
           

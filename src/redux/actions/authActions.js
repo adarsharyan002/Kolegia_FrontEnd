@@ -325,7 +325,7 @@ export const logoutUser= (token)=> async (dispatch) => {
             const token = localStorage.getItem("jwt");
             const decoded = jwt_decode(token);
          const res=  await axios.put(
-            "hhttps://kolegia.herokuapp.com/api/v1/auth/edit-profile",formData
+            "https://kolegia.herokuapp.com/api/v1/auth/edit-profile",formData
               
             
               ,{
