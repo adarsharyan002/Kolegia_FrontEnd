@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch ,useSelector} from "react-redux";
 import "../Components/Buy_sell/AddItems.css";
 import jwt_decode from "jwt-decode";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 import { addNewBuySellItem ,resetStatus} from "../redux/actions/BuySellActions";
 
@@ -17,6 +19,7 @@ import { addNewBuySellItem ,resetStatus} from "../redux/actions/BuySellActions";
  const [category,setCategory]=useState('')
  const [boughtTime,setBoughtTime]=useState('')
  const [warranty,setWarranty]=useState('')
+ const [loading, setLoading] = useState(false);
 
  
 
@@ -60,12 +63,19 @@ if(Status3===200){
 Message3=errorMessage4;
 }
 
+useEffect(()=>{
+   
+  setLoading(false);
+ },[Message3]);
+
+
 
  
 
 //FUCNTION TO DISPATCH ACTION
 const handleSubmit=(e)=>{
   e.preventDefault();
+  setLoading(true);
   const token = localStorage.getItem("jwt");
     const decoded = jwt_decode(token);
 
@@ -97,7 +107,7 @@ const handleSubmit=(e)=>{
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
           <h2 style={{color:'#332A7C',marginBottom:'18px',fontFamily:"Inter, sans-serif"}}>Add Product</h2>
-            <form className="form02" onSubmit={handleSubmit}>
+            <form className="form02" >
            
             
             <input  onChange={e=>setItemName(e.target.value)} type="text" placeholder="Name of product" />
@@ -120,7 +130,17 @@ const handleSubmit=(e)=>{
             <input  onChange={e=>setCategory(e.target.value)} type="text" placeholder="Category" />
             <label style={{fontFamily:"Hind Siliguri, sans-serif",fontWeight:'700',fontSize:'18px'}} htmlFor="input">Upload-Image</label>
             <input  onChange={e=>setImageList([...imageList,...e.target.files])} type="file" multiple />
-            <button style={{fontFamily:"Inter, sans-serif"}}>Submit</button>
+            {/* <button style={{fontFamily:"Inter, sans-serif"}}>Submit</button> */}
+            <LoadingButton
+                style={{width:'24rem',height:'2.5rem',fontSize:'1.4rem',background:"#F25767",color:'white',border:'none',fontFamily:"Inter, monospace",fontWeight:'700',borderRadius:'6px'}}
+                className='submit button'
+        onClick={handleSubmit}
+        endIcon={<ArrowForwardIosIcon/>}
+        loading={loading}
+        loadingPosition="end"
+        variant="contained"
+      >Submit
+      </LoadingButton>
             <p style={{fontFamily:"Hind Siliguri, sans-serif",fontWeight:'700',fontSize:'14px'}} >{Message3}</p>
             </form>
 
