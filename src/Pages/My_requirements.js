@@ -35,7 +35,7 @@ const handleClick=(data,e)=>{
 
 
 }
-    console.log(isLoading);
+    
     return (
       <>
       {isLoading ? (

@@ -109,7 +109,7 @@ export const addNewLostFoundItem = (data) => async (dispatch) => {
   try {
     var token = "";
     for (var key of data.entries()) {
-      console.log(key[0], " ", key[1]);
+     
       if (key[0] === "token") {
         token = key[1];
       }

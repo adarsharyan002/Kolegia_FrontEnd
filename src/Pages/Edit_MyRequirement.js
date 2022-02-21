@@ -39,7 +39,7 @@ var Title,Description,id;
  }
 
 
-// console.log(location.state.Data);
+
 
  
 
