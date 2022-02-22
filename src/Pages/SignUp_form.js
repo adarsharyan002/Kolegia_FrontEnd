@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import { useDispatch,useSelector } from "react-redux";
 import "../Components/LoginSignUp/SignUpForm.css";
 import { addUserDetails } from "../redux/actions/authActions";
 import {  useNavigate,useLocation} from "react-router-dom"
 import {resetErrorMessage} from '../redux/actions/authActions'
 import Navbar from "../Components/Appbar/Navbar";
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const SignUpForm = () => {
     const addUserResponse = useSelector((state) => state.auth.addUserResponse);
@@ -16,6 +17,8 @@ const SignUpForm = () => {
     const errorMessage=useSelector((state)=>state.auth.errorMessage)
     
     var signUpErrorMessage;
+
+    
     
     if(location.state !=null){
         if(location.state.Email){
@@ -41,8 +44,12 @@ const SignUpForm = () => {
     const [terms_accepted,setTerms_accepted]=useState(false)
     const [year,setYear]=useState('')
     const [batch,setBatch]=useState('')
+    const [loading, setLoading] = useState(false);
 
-    
+    useEffect(()=>{
+   
+        setLoading(false);
+       },[signUpErrorMessage]);
 
     const dispatch=useDispatch();
     
@@ -62,6 +69,7 @@ else {
 
 
     const handleSubmit=()=>{
+        setLoading(true);
         const formData= new FormData();
        
         formData.append('name',name)
@@ -110,8 +118,18 @@ else {
             onChange={(e)=>setTerms_accepted(e.target.checked)}
             defaultChecked={terms_accepted}
             />
-            <button style={{width:'24rem',height:'2.5rem',fontSize:'1.4rem',background:"#F25767",color:'white',border:'none',fontFamily:"Inter, monospace",fontWeight:'700',
-            borderRadius:'6px'}} onClick={handleSubmit}>SUBMIT</button>
+            {/* <button style={{width:'24rem',height:'2.5rem',fontSize:'1.4rem',background:"#F25767",color:'white',border:'none',fontFamily:"Inter, monospace",fontWeight:'700',
+            borderRadius:'6px'}} onClick={handleSubmit}>SUBMIT</button> */}
+            <LoadingButton
+                style={{width:'24rem',height:'2.5rem',fontSize:'1.4rem',background:"#F25767",color:'white',border:'none',fontFamily:"Inter, monospace",fontWeight:'700',borderRadius:'6px'}}
+                className='submit button'
+        onClick={handleSubmit}
+        endIcon={<ArrowForwardIosIcon/>}
+        loading={loading}
+        loadingPosition="end"
+        variant="contained"
+      >Submit
+      </LoadingButton>
             <p style={{color:'black'}}>{signUpErrorMessage}</p>
         </div>
         </div>
