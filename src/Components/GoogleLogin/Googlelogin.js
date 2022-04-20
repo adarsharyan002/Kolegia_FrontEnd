@@ -55,7 +55,8 @@ function Googlelogin() {
         <div className='Google-login'>
             <GoogleLogin
             
-              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              clientId='776693258230-18gd0unjibr0d8n5o3ajfrh3kislbf54.apps.googleusercontent.com'
               
               buttonText="Continue  with Google"
               onSuccess={handleLogin}

@@ -21,15 +21,18 @@ const My_requirements = () => {
       setItems(itemList)
       }, []);
       
+      useEffect(()=>{
+        setItems(itemList)
+       },[itemList])
      
 
 
       //delete-item
-const handleClick=(data,e)=>{
+const handleClick=async(data,e)=>{
     
     const token = localStorage.getItem("jwt");
       const decoded = jwt_decode(token);
-   dispatch(deleteRequirement(data._id,decoded.auth_token));
+  await dispatch(deleteRequirement(data._id,decoded.auth_token));
    const newitems = items.filter(item => item._id != data._id)
    setItems(newitems)
 

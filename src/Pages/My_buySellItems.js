@@ -39,7 +39,10 @@ const [items,setItems]=useState([])
 
   ///delete item
 
- 
+ useEffect(()=>{
+  setItems(itemList)
+ },[itemList])
+
   const handleClick=async(data,e)=>{
     
     const token = localStorage.getItem("jwt");
