@@ -16,13 +16,14 @@ const OtpPage = () => {
     const responseStatusCode= useSelector((state) => state.auth.otpStatusCode);
     const errorMessage=useSelector((state)=>state.auth.errorMessage)
     const [loading, setLoading] = useState(false);
+    const [error,setError]=useState('')
+
     const [otp,setOtp]=useState(0);
     const otpId= useSelector((state) => state.auth.otpId);
     
 
 
     var Email;
-    var message;
     var Verification;
     if(location.state !=null){
          Email=location.state.Email;
@@ -31,26 +32,32 @@ const OtpPage = () => {
     ///otp-verification
 
     
-    if(responseStatusCode===200){
-        dispatch(resetErrorMessage)
-        if(Verification==='EMAIL_VERIFICATION'){
-        navigate('/signUpForm',{
-            state:{Email:Email}
-          });
-      }
-     else if(Verification==='FORGOT_PASSWORD'){
-        navigate('/resetPassword',{
-            state:{Email:Email}
-          });
-        }
-    }else  {
-        message=errorMessage
-      }
-
+    
 
       useEffect(()=>{
         setLoading(false);
-       },[message]);
+        if(responseStatusCode===200){
+           
+            if(Verification==='EMAIL_VERIFICATION'){
+            navigate('/signUpForm',{
+                state:{Email:Email}
+              });
+          }
+         else if(Verification==='FORGOT_PASSWORD'){
+            navigate('/resetPassword',{
+                state:{Email:Email}
+              });
+            }
+        }
+        if(errorMessage)setError(errorMessage)
+
+        return ()=>{
+            dispatch(resetErrorMessage)
+
+        }
+
+    
+       },[Email, Verification, dispatch, errorMessage,  navigate, responseStatusCode]);
        
     const style={
 
@@ -104,7 +111,7 @@ cont:{
       >
   Verify Otp
       </LoadingButton>
-            <p style={{color:'black'}}>{message}</p>
+            <p style={{color:'black'}}>{error}</p>
             </div>
            
         </div>

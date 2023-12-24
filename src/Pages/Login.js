@@ -1,26 +1,26 @@
 import '../Components/LoginSignUp/Login.css'
 import { useDispatch ,useSelector} from "react-redux";
 import { useEffect, useState } from 'react';
-import {verifyEmail,signInWithEmail} from '../redux/actions/authActions'
+import {signInWithEmail} from '../redux/actions/authActions'
 import { Link, useNavigate } from "react-router-dom";
 import Googlelogin from '../Components/GoogleLogin/Googlelogin';
 import LoadingButton from '@mui/lab/LoadingButton';
 import {resetErrorMessage} from '../redux/actions/authActions'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Navbar from "../Components/Appbar/Navbar";
 
 
- 
 
 const LoginSignUp = () => {
 
   
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const [error,setError]=useState('')
+  // const [isLoggedIn,setIsLoggedIn]=useState(false)
+
+
+ const {loginStatusCode,loginWithEmailResponse,errorMessage,isAuthenticated} = useSelector((state)=>state.auth)
  
-  const responseStatusCode= useSelector((state) => state.auth.loginStatusCode);
-  const loginWithEmailResponse=useSelector((state)=>state.auth.loginWithEmailResponse)
-  const errorMessage=useSelector((state)=>state.auth.errorMessage)
 
   
   
@@ -35,34 +35,43 @@ const LoginSignUp = () => {
 
 
  //ErrorMessage
-var Message;
+
 
  //user-login-verification
-if(loginWithEmailResponse.data){
-  dispatch(resetErrorMessage)
-  if(loginWithEmailResponse.data.user_token){
-    localStorage.setItem("jwt",loginWithEmailResponse.data.user_token);
-    navigate('/dashboard');
-}
-}
-else if(responseStatusCode===200){
-  dispatch(resetErrorMessage)
-  navigate('/otpPage',{
-    state:{Email:email,verification:'EMAIL_VERIFICATION'}
-  });
 
-}else if(errorMessage) {
-  
-  Message=errorMessage
-  // setLoading(false);
-}
+
+
  
 
 
  useEffect(()=>{
+
+  if(isAuthenticated){
+    
+    
+    if(loginWithEmailResponse.data.user_token){
+      localStorage.setItem("jwt",loginWithEmailResponse.data.user_token);
+      navigate('/dashboard');
+  }
+  }
+
+  if(errorMessage)setError(errorMessage)
+  else if(loginStatusCode===200){
    
-  setLoading(false);
- },[Message]);
+    navigate('/otpPage',{
+      state:{Email:email,verification:'EMAIL_VERIFICATION'}
+    });
+  
+  }
+
+   
+ 
+
+  return ()=>{
+    dispatch(resetErrorMessage)
+    
+  }
+ },[dispatch, email, errorMessage, isAuthenticated, loginStatusCode, loginWithEmailResponse.data, navigate]);
  
 
 
@@ -71,13 +80,13 @@ else if(responseStatusCode===200){
 
 
 const handleSubmitSignIn=()=>{
-  setLoading(true);
+  
     dispatch(signInWithEmail(email,password))
   
 }
 
 const handleClick=()=>{
-  dispatch(resetErrorMessage);
+
   navigate('/signUp')
 }
 
@@ -124,14 +133,14 @@ const handleClick=()=>{
                 className='submit button'
         onClick={handleSubmitSignIn}
         endIcon={<ArrowForwardIosIcon/>}
-        loading={loading}
+        
         loadingPosition="end"
         variant="contained"
       >
         Sign In
       </LoadingButton>
                
-                <p style={{color:'black'}}>{Message}</p>
+                <p style={{color:'black'}}>{error}</p>
                 <Googlelogin/>
                 
               </div>

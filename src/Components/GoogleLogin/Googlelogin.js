@@ -4,31 +4,35 @@ import GoogleLogin from 'react-google-login';
 import { useDispatch ,useSelector} from "react-redux";
 import {loginWithGoogle,resetStatus} from '../../redux/actions/authActions'
 import {  useNavigate } from "react-router-dom";
+import { useEffect,useState } from 'react';
 
 function Googlelogin() {
   const dispatch=useDispatch();
   const navigate = useNavigate();
   const errorResponse=useSelector((state)=>state.auth.loginWithGoogleErrorResponse)
   const successResponse=useSelector((state)=>state.auth.loginWithGoogleResponse)
+  const [error,setError]=useState('')
+
 
   const isLoggedIn=useSelector((state)=>state.auth.isLoggedIn)
 
-  var ErrorMessage;
+  useEffect(()=>{
+    
   
   if(errorResponse){
   
    if(errorResponse.status===500){
-     ErrorMessage=errorResponse.data.message
+     setError(errorResponse.data.message)
    }
    }
   
     if(successResponse){
-      dispatch(resetStatus)
+      
       if(isLoggedIn){
         localStorage.setItem("jwt",successResponse.data.user_token);
         navigate('/dashboard');
       } else{
-        dispatch(resetStatus)
+        
         navigate('/signUpForm',{
               state:{Email:successResponse.data.user_details.email,
                       name:successResponse.data.user_details.name,
@@ -39,6 +43,11 @@ function Googlelogin() {
 
       }
   }
+
+  return ()=>{
+    dispatch(resetStatus);
+  }
+  },[dispatch, errorResponse, isLoggedIn, navigate, successResponse])
   const handleFailure = (result) => {
       console.log(result)
   
@@ -66,7 +75,7 @@ function Googlelogin() {
             
           
         </div>
-        <p style={{color:'black'}}>{ErrorMessage}</p>
+        <p style={{color:'black'}}>{error}</p>
      
     </div>
   );

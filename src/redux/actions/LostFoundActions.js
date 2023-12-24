@@ -31,7 +31,7 @@ export const getAllLostFoundItems = () => async (dispatch) => {
     const decoded = jwt_decode(token);
 
     const { data } = await axios.get(
-      "https://kolegia.herokuapp.com/api/v1/lost-found-items/get-lost-found-feed",
+      "http://localhost:3000/api/v1/lost-found-items/get-lost-found-feed",
       {
         headers: {
           authorization: `Bearer ${decoded.auth_token}`,
@@ -58,7 +58,7 @@ export const lostFoundSearch = (searchQuery) => async (dispatch) => {
     const decoded = jwt_decode(token);
 
     const { data } = await axios.get(
-      `https://kolegia.herokuapp.com/api/v1/lost-found-items/search-lost-found-products?search=${searchQuery}`,
+      `http://localhost:3000/api/v1/lost-found-items/search-lost-found-products?search=${searchQuery}`,
       {
         headers: {
           authorization: `Bearer ${decoded.auth_token}`,
@@ -89,7 +89,7 @@ export const getLostFoundProductDetails = (itemData) => async (dispatch) => {
   });
   try {
     const { data } = await axios.get(
-      `https://kolegia.herokuapp.com/api/v1/lost-found-items/get-lost-found-product-details?product_id=${itemData.product_id}`,
+      `http://localhost:3000/api/v1/lost-found-items/get-lost-found-product-details?product_id=${itemData.product_id}`,
       {
         headers: {
           authorization: `Bearer ${itemData.decoded.auth_token}`,
@@ -116,7 +116,7 @@ export const addNewLostFoundItem = (data) => async (dispatch) => {
     }
   
     const res = await axios.post(
-      "https://kolegia.herokuapp.com/api/v1/lost-found-items/create-new-lost-found-product",
+      "http://localhost:3000/api/v1/lost-found-items/create-new-lost-found-product",
       data,
       {
         headers: {
@@ -152,7 +152,7 @@ export const getAllOwnLostFoundItems = () => async (dispatch) => {
     const token = localStorage.getItem("jwt");
     const decoded = jwt_decode(token);
     const { data } = await axios.get(
-      "https://kolegia.herokuapp.com/api/v1/lost-found-items/get-own-lost-found-list",
+      "http://localhost:3000/api/v1/lost-found-items/get-own-lost-found-list",
       {
         headers: {
           authorization: `Bearer ${decoded.auth_token}`,
@@ -178,7 +178,7 @@ export const editLostFoundItem = (formData) => async (dispatch) => {
       }
     }
     const res = await axios.put(
-      "https://kolegia.herokuapp.com/api/v1/lost-found-items/edit-lost-found-product",
+      "http://localhost:3000/api/v1/lost-found-items/edit-lost-found-product",
       formData,
 
       {
@@ -215,7 +215,7 @@ export const deleteLostFoundItem = (data) => async (dispatch) => {
   try {
   
     const res = await axios.delete(
-      "https://kolegia.herokuapp.com/api/v1/lost-found-items/delete-lost-found-product",
+      "http://localhost:3000/api/v1/lost-found-items/delete-lost-found-product",
       {
         headers: {
           authorization: `Bearer ${data.token}`,
@@ -250,7 +250,7 @@ export const markAsFound = (data) => async (dispatch) => {
   try {
    
     const res = await axios.put(
-      "https://kolegia.herokuapp.com/api/v1/lost-found-items/mark-as-found",
+      "http://localhost:3000/api/v1/lost-found-items/mark-as-found",
       data,
       {
         headers: {
@@ -287,7 +287,7 @@ export const raiseHand = (data) => async (dispatch) => {
   try {
     
     const res = await axios.post(
-      "https://kolegia.herokuapp.com/api/v1/raisedhands/raise-hand-on-an-item",
+      "http://localhost:3000/api/v1/raisedhands/raise-hand-on-an-item",
       data,
       {
         headers: {
@@ -322,7 +322,7 @@ export const getLostFoundItemResponses = (data) => async (dispatch) => {
   });
   try {
     const res = await axios.get(
-      "https://kolegia.herokuapp.com/api/v1/raisedhands/get-raised-responses",
+      "http://localhost:3000/api/v1/raisedhands/get-raised-responses",
 
       {
         headers: {
@@ -355,7 +355,7 @@ export const acceptRaisedHand = (data) => async (dispatch) => {
   try {
   
     const res = await axios.post(
-      "https://kolegia.herokuapp.com/api/v1/raisedhands/accept-raised-hand",
+      "http://localhost:3000/api/v1/raisedhands/accept-raised-hand",
       data,
       {
         headers: {
@@ -386,7 +386,7 @@ export const rejectRaisedHand = (data) => async (dispatch) => {
   });
   try {
     const res = await axios.delete(
-      "https://kolegia.herokuapp.com/api/v1/raisedhands/reject-raised-hand",
+      "http://localhost:3000/api/v1/raisedhands/reject-raised-hand",
 
       {
         headers: {

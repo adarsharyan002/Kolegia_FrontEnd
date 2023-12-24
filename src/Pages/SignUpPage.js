@@ -16,12 +16,11 @@ const SignUp = () => {
 
   
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   // window.localStorage.removeItem('jwt');
-  const responseStatusCode= useSelector((state) => state.auth.loginStatusCode);
-  const loginWithEmailResponse=useSelector((state)=>state.auth.loginWithEmailResponse)
-  const errorMessage=useSelector((state)=>state.auth.errorMessage)
+  const {loginStatusCode,loginWithEmailResponse,errorMessage} = useSelector((state)=>state.auth)
 
+  
   
   
   
@@ -30,32 +29,16 @@ const SignUp = () => {
   const dispatch=useDispatch();
 
  const [email,setEmail]= useState('')
+ const [error,setError]=useState('')
+
 
  
 
 
  //ErrorMessage
-var Message;
 
- //user-login-verification
-if(loginWithEmailResponse.data){
-  dispatch(resetErrorMessage)
-  if(loginWithEmailResponse.data.user_token){
-    localStorage.setItem("jwt",loginWithEmailResponse.data.user_token);
-    navigate('/dashboard');
-}
-}
-else if(responseStatusCode===200){
-  dispatch(resetErrorMessage)
-  navigate('/otpPage',{
-    state:{Email:email,verification:'EMAIL_VERIFICATION'}
-  });
 
-}else if(errorMessage) {
-  
-  Message=errorMessage
-  // setLoading(false);
-}
+ 
 
 const handleClick=()=>{
   dispatch(resetErrorMessage);
@@ -65,9 +48,22 @@ const handleClick=()=>{
 
 
  useEffect(()=>{
-  setLoading(false);
+ 
   
- },[Message]);
+
+  if(errorMessage)setError(errorMessage)
+  else if(loginStatusCode===200){
+   
+    navigate('/otpPage',{
+      state:{Email:email,verification:'EMAIL_VERIFICATION'}
+    });
+  }
+
+  return ()=>{
+    dispatch(resetErrorMessage)
+  }
+  
+ },[dispatch, email, errorMessage, loginStatusCode, loginWithEmailResponse.data, navigate]);
  
 
 
@@ -76,7 +72,7 @@ const handleClick=()=>{
 
 
 const handleSubmitSignUp=()=>{
-  setLoading(true);
+  
   dispatch(verifyEmail(email));
   
 }
@@ -114,14 +110,14 @@ const handleSubmitSignUp=()=>{
                 className='submit button'
         onClick={handleSubmitSignUp}
         endIcon={<ArrowForwardIosIcon/>}
-        loading={loading}
+        // loading={loading}
         loadingPosition="end"
         variant="contained"
       >
         Verify Email
       </LoadingButton>
 
-                <p style={{color:'black'}}>{Message}</p>
+                <p style={{color:'black'}}>{error}</p>
                 
                 <Googlelogin />
               </div>

@@ -37,7 +37,7 @@ const Navbar = ({visibleSearch,presentPage}) => {
     const handleSearchChange=(event)=>{
         setSearchQuery(event.target.value); 
         if(event.target.value.length==0){
-            if(presentPage=="lostFound"){
+            if(presentPage==="lostFound"){
                 dispatch(emptySearchLostFound());
             }else{
                 dispatch(emptySearchBuySell());
@@ -47,7 +47,7 @@ const Navbar = ({visibleSearch,presentPage}) => {
     const handleSearch=(e)=>{
         e.preventDefault();
             if (searchQuery.length>0) {
-                    if(presentPage=="lostFound"){
+                    if(presentPage==="lostFound"){
                         dispatch(lostFoundSearch(searchQuery));
                     }else{
                         dispatch(buySellSearch(searchQuery));
@@ -59,8 +59,8 @@ const Navbar = ({visibleSearch,presentPage}) => {
         <div className="container-nav">
             <div className="part_one">
                 <div onClick={()=>navigate('/dashboard')} className="header1">
-                    <img src="https://res.cloudinary.com/kartikeyvaish/image/upload/v1642841457/Kolegia/logo_snpqqs.png" alt="" />
-                    <p id='abc'>olegia</p>
+                    {/* <img src="https://res.cloudinary.com/kartikeyvaish/image/upload/v1642841457/Kolegia/logo_snpqqs.png" alt="" /> */}
+                    <p id='abc'>Kolegia</p>
                 </div>
                 <div className='ul'>
                     {visibleSearch?

@@ -27,7 +27,8 @@ const initialState={
     requestId:'',
     editProfileResponse:'',
     editProfileData:'',
-    dashboardStats:''
+    dashboardStats:'',
+    isAuthenticated:false
 }
 
 const AuthReducer=(state=initialState,action)=>{
@@ -74,7 +75,8 @@ const AuthReducer=(state=initialState,action)=>{
                                     return{
                                         ...state,
                                         loginWithEmailResponse:action.payload,
-                                        status:action.payload.status
+                                        status:action.payload.status,
+                                        isAuthenticated:true
                                     };
                     case CHECKING_ERROR:
                                         return{
@@ -116,6 +118,8 @@ const AuthReducer=(state=initialState,action)=>{
                             return{
                             ...state,
                             errorMessage:'', 
+                            isAuthenticated:false,
+                            loginStatusCode:''
                             }       
                         
                         case GET_DASHBOARD_STATS:

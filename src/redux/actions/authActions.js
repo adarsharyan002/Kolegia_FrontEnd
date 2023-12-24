@@ -24,9 +24,10 @@ import {
     //VERIFY EMAIL
 export const verifyEmail=(email)=>async (dispatch)=>{
     
+    
     try {
         const emailResponse=await axios.post(
-            "https://kolegia.herokuapp.com/api/v1/auth/send-email-register-otp",{
+            "http://localhost:3000/api/v1/auth/send-email-register-otp",{
                 email:email
             }
             
@@ -54,7 +55,7 @@ export const verifyEmailForReset=(email)=>async (dispatch)=>{
     
     try {
         const emailResponseforReset=await axios.post(
-            "https://kolegia.herokuapp.com/api/v1/auth/send-forgot-password-otp",{
+            "http://localhost:3000/api/v1/auth/send-forgot-password-otp",{
                 email:email
             }
             
@@ -82,7 +83,7 @@ export const verifyOtp=(otp,otpId,Verification)=>async (dispatch)=>{
 
     try {
         const OtpResponse=await axios.post(
-            "https://kolegia.herokuapp.com/api/v1/otp/verify-otp",{
+            "http://localhost:3000/api/v1/otp/verify-otp",{
                 otp_id: otpId,
                 otp: otp,
                 verification_type: Verification
@@ -111,7 +112,7 @@ export const verifyOtpForResetPassword=(otp,otpId)=>async (dispatch)=>{
 
     try {
         const OtpResponse=await axios.post(
-            "https://kolegia.herokuapp.com/api/v1/otp/verify-otp",{
+            "http://localhost:3000/api/v1/otp/verify-otp",{
                 otp_id: otpId,
                 otp: otp,
                 verification_type: "EMAIL_VERIFICATION"
@@ -140,7 +141,7 @@ export const addUserDetails=(data)=>async (dispatch)=>{
 
     try {
         const addUserRes=await axios.post(
-            "https://kolegia.herokuapp.com/api/v1/auth/register",
+            "http://localhost:3000/api/v1/auth/register",
                
             data
             
@@ -168,7 +169,7 @@ export const loginWithGoogle=(id_token)=>async (dispatch)=>{
 
     try {
         const loginUserRes=await axios.post(
-            "https://kolegia.herokuapp.com/api/v1/auth/google-login",{
+            "http://localhost:3000/api/v1/auth/google-login",{
                id_token:id_token,
             }
             
@@ -195,12 +196,13 @@ export const signInWithEmail=(email,password)=>async (dispatch)=>{
 
     try {
         const loginUserRes=await axios.post(
-            "https://kolegia.herokuapp.com/api/v1/auth/login",{
+            "http://localhost:3000/api/v1/auth/login",{
                email:email,
                password:password
             }
             
         );
+        console.log(loginUserRes)
        
         dispatch({
             type:LOGIN_WITH_EMAIL,
@@ -226,7 +228,7 @@ export const logoutUser= (token)=> async (dispatch) => {
       try {
   
        const res=  await axios.delete(
-          "https://kolegia.herokuapp.com/api/v1/auth/logout",
+          "http://localhost:3000/api/v1/auth/logout",
             
        {
             
@@ -261,7 +263,7 @@ export const logoutUser= (token)=> async (dispatch) => {
 
         try {
             const resetResponse=await axios.post(
-                "https://kolegia.herokuapp.com/api/v1/auth/reset-password",{
+                "http://localhost:3000/api/v1/auth/reset-password",{
                    email,password,reset_request_id
                 }
                 
@@ -290,7 +292,7 @@ export const logoutUser= (token)=> async (dispatch) => {
             const token = localStorage.getItem("jwt");
             const decoded = jwt_decode(token);
             const changeResponse=await axios.put(
-                "https://kolegia.herokuapp.com/api/v1/auth/change-password",{
+                "http://localhost:3000/api/v1/auth/change-password",{
                    CurrentPassword:password,
                    NewPassword:NewPassword
 
@@ -325,7 +327,7 @@ export const logoutUser= (token)=> async (dispatch) => {
             const token = localStorage.getItem("jwt");
             const decoded = jwt_decode(token);
          const res=  await axios.put(
-            "https://kolegia.herokuapp.com/api/v1/auth/edit-profile",formData
+            "http://localhost:3000/api/v1/auth/edit-profile",formData
               
             
               ,{
@@ -383,7 +385,7 @@ export const logoutUser= (token)=> async (dispatch) => {
 
         const res = await axios.get(
           
-          "https://kolegia.herokuapp.com/api/v1/auth/get-dashboard-statistics",{
+          "http://localhost:3000/api/v1/auth/get-dashboard-statistics",{
             headers:{
               authorization:`Bearer ${decoded.auth_token}`,
             },

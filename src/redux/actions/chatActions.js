@@ -16,7 +16,7 @@ export const getAllChats = (data) => async (dispatch) => {
 
   try {
     const res = await axios.get(
-      "https://kolegia.herokuapp.com/api/v1/chats/get-chats",
+      "http://localhost:3000/api/v1/chats/get-chats",
       {
         headers: {
           authorization: `Bearer ${data.token}`,
@@ -42,7 +42,7 @@ export const getMessages = (data) => async (dispatch) => {
 
   try {
     const res = await axios.get(
-      `https://kolegia.herokuapp.com/api/v1/chats/get-messages?room_id=${data.room_id}`,
+      `http://localhost:3000/api/v1/chats/get-messages?room_id=${data.room_id}`,
       {
         headers: {
           authorization: `Bearer ${data.token}`,
@@ -69,7 +69,7 @@ export const getNextBacthOfMessages = (data) => async (dispatch) => {
   try {
     
     const res = await axios.get(
-      `https://kolegia.herokuapp.com/api/v1/chats/get-messages?room_id=${data.room_id}&skip=${data.skip}`,
+      `http://localhost:3000/api/v1/chats/get-messages?room_id=${data.room_id}&skip=${data.skip}`,
       {
         headers: {
           authorization: `Bearer ${data.token}`,
@@ -101,7 +101,7 @@ export const sendMessage = (data) => async (dispatch) => {
       }
     }
     const res = await axios.post(
-      `https://kolegia.herokuapp.com/api/v1/chats/send-message`,
+      `http://localhost:3000/api/v1/chats/send-message`,
       data,
       {
         headers: {

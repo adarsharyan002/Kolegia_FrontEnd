@@ -9,30 +9,19 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 const SignUpForm = () => {
-    const addUserResponse = useSelector((state) => state.auth.addUserResponse);
+    const {addUserResponse,errorMessage} = useSelector((state) => state.auth);
     const location=useLocation();
-   var Email;
-   var Name;
-   var Profile_picture;
-    const errorMessage=useSelector((state)=>state.auth.errorMessage)
+
+    
+  
     
     var signUpErrorMessage;
 
     
-    
-    if(location.state !=null){
-        if(location.state.Email){
-            Email=location.state.Email
-        }
-        if(location.state.name && location.state.profile_picture){
-            Name=location.state.name;
-           Profile_picture=location.state.profile_picture;
-        }
-             
-        }
+   
  
     const navigate=useNavigate();
-    const [name,setName]=useState(Name)
+    const [name,setName]=useState()
     const [email,setEmail]=useState('')
     const [roll_number,setRollNo]=useState('')
     const [hostel,setHostel]=useState('')
@@ -45,26 +34,43 @@ const SignUpForm = () => {
     const [year,setYear]=useState('')
     const [batch,setBatch]=useState('')
     const [loading, setLoading] = useState(false);
+    const [error,setError]=useState('')
 
     useEffect(()=>{
+         
+    if(location.state !=null){
+        if(location.state.Email){
+            setEmail(location.state.Email)
+        }
+        if(location.state.name && location.state.profile_picture){
+            setName(location.state.name)
+           setProfilePicture(location.state.profile_picture)
+        }
+             
+        }
    
         setLoading(false);
-       },[signUpErrorMessage]);
+       },[location.state, signUpErrorMessage]);
 
     const dispatch=useDispatch();
     
-//signUp verified here
-    if(addUserResponse.data){
-        if(addUserResponse.data.user_token){
-            dispatch(resetErrorMessage)
-        localStorage.setItem("jwt",addUserResponse.data.user_token);
-        navigate('/dashboard');
-    }
-}
-else {
-    signUpErrorMessage=errorMessage
 
-  }
+    useEffect(()=>{
+        if(addUserResponse.data){
+            if(addUserResponse.data.user_token){
+                
+            localStorage.setItem("jwt",addUserResponse.data.user_token);
+            navigate('/dashboard');
+        }
+    }
+    if(errorMessage)setError(errorMessage)
+
+    return ()=>{
+        dispatch(resetErrorMessage)
+    }
+    },[addUserResponse.data, dispatch, errorMessage, navigate])
+//signUp verified here
+   
 
 
 
@@ -73,7 +79,7 @@ else {
         const formData= new FormData();
        
         formData.append('name',name)
-        formData.append('email',Email)
+        formData.append('email',email)
         formData.append('roll_number',roll_number)
         formData.append('hostel',hostel)
         formData.append('room_number',room_number)
@@ -100,8 +106,8 @@ else {
         <div className="signUpContainer">
         <div  className="signUpFormCont">
             <h1 style={{width:'100%',color:'#332A7C',fontFamily:"Inconsolata, monospace",fontSize:'30px'}}>ENTER YOUR DETAILS</h1>
-            <input style={{marginTop:'20px'}} defaultValue={Name} onChange={e=>setName(e.target.value)} placeholder="Name"  type="text" />
-            <input style={{marginTop:'20px'}} defaultValue={Email} onChange={e=>setEmail(e.target.value)} placeholder=" Email" type="text" />
+            <input style={{marginTop:'20px'}} defaultValue={name} onChange={e=>setName(e.target.value)} placeholder="Name"  type="text" />
+            <input style={{marginTop:'20px'}} defaultValue={email} onChange={e=>setEmail(e.target.value)} placeholder=" Email" type="text" />
             <input onChange={e=>setPhone(e.target.value)} type="number" placeholder="Mobile No" />
             <input onChange={e=>setYear(e.target.value)} type="string" placeholder="Year(2019,2020..)" />
             <input onChange={e=>setBatch(e.target.value)} type="string" placeholder="Batch(IMG,IMT,BCS)"/>
@@ -125,12 +131,12 @@ else {
                 className='submit button'
         onClick={handleSubmit}
         endIcon={<ArrowForwardIosIcon/>}
-        loading={loading}
-        loadingPosition="end"
+       
+        
         variant="contained"
       >Submit
       </LoadingButton>
-            <p style={{color:'black'}}>{signUpErrorMessage}</p>
+            <p style={{color:'black'}}>{error}</p>
         </div>
         </div>
         </>
