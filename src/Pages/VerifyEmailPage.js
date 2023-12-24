@@ -21,15 +21,16 @@ const VerifyEmailPage = () => {
     
    
 
-    if(responseStatusCode===200){
-        navigate('/otpPage',{
-          state:{Email:email,verification:'FORGOT_PASSWORD'}
-        });}
+   
     
     var message3=errorMessage;
     useEffect(()=>{
+        if(responseStatusCode===200){
+            navigate('/otpPage',{
+              state:{Email:email,verification:'FORGOT_PASSWORD'}
+            });}
         setLoading(false);
-       },[message3]);
+       },[email, message3, navigate, responseStatusCode]);
        
    
     const style={
